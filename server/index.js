@@ -76,7 +76,6 @@ const scrapeForJobs = async urlData => {
           null;
         const currentJobBlock =
           document.querySelector(currentJobBlockHolder) || null;
-        console.log("JOB BLOCK: ", currentJobBlock);
         if (currentJobBlock) {
           const title = document.querySelector(`${currentJobBlockHolder} > h3`)
             .innerText;
