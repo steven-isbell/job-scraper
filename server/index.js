@@ -53,7 +53,7 @@ const scrapeForJobs = async urlData => {
     const page = await browser.newPage();
 
     await page.goto("https://www.linkedin.com");
-    await sleep(3000);
+    await sleep(2000);
     await page.click("#login-email");
     await page.keyboard.type(email);
     await page.click("#login-password");
@@ -106,5 +106,3 @@ const scrapeForJobs = async urlData => {
     console.log(err);
   }
 };
-
-// scrapeForJobs();
