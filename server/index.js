@@ -16,7 +16,7 @@ const sleep = function(timeToWait) {
 
 // READ DATA FROM CSV
 
-const parseData = () => {
+(() => {
   let csvData = [];
   fs
     .createReadStream(`${__dirname}/../dataToScrape.csv`)
@@ -25,9 +25,8 @@ const parseData = () => {
       csvData.push(data);
     })
     .on("end", () => scrapeForJobs(csvData));
-};
+})();
 
-parseData();
 
 // WRITE DATA TO CSV
 
