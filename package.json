@@ -6,6 +6,7 @@
   "dependencies": {
     "fast-csv": "^2.4.1",
     "nodemailer": "^4.4.2",
+    "promise-retry": "^1.1.1",
     "puppeteer": "^1.0.0"
   }
 }

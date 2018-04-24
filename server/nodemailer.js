@@ -20,7 +20,7 @@ const sendMail = () =>
       text: `Here's the details you requested.`,
       attachments: [{ filename: "jobs.csv", path: `${__dirname}/../jobs.csv` }]
     },
-    function(error, response) {
+    (error, response) => {
       if (error) {
         console.log(error);
       } else {

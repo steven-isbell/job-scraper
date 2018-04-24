@@ -5,19 +5,12 @@ const nodemailer = require("nodemailer");
 
 const sendMail = require(`${__dirname}/nodemailer`);
 const { email, pass } = require(`${__dirname}/creds`);
-
-const sleep = function(timeToWait) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(true);
-    }, timeToWait);
-  });
-};
+const sleep = require(`${__dirname}/utils`);
 
 // READ DATA FROM CSV
 
 (() => {
-  let csvData = [];
+  const csvData = [];
   fs
     .createReadStream(`${__dirname}/../dataToScrape.csv`)
     .pipe(csv({ headers: true }))
@@ -26,7 +19,6 @@ const sleep = function(timeToWait) {
     })
     .on("end", () => scrapeForJobs(csvData));
 })();
-
 
 // WRITE DATA TO CSV
 
@@ -52,7 +44,7 @@ const scrapeForJobs = async urlData => {
     const page = await browser.newPage();
 
     await page.goto("https://www.linkedin.com");
-    await sleep(2000);
+    await sleep(page, 60000);
     await page.click("#login-email");
     await page.keyboard.type(email);
     await page.click("#login-password");
@@ -63,7 +55,7 @@ const scrapeForJobs = async urlData => {
     for (let i = 0; i < urlData.length; i++) {
       await page.goto(urlData[i].url);
 
-      await sleep(2000);
+      await sleep(page, 60000);
 
       await page.screenshot({
         path: `${__dirname}/screenshots/example${i}.png`
